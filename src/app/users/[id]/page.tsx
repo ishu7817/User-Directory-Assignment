@@ -1,38 +1,37 @@
+import React from 'react'
+import { getUserById } from '@/lib/api'
+import Link from "next/link";
+import { ArrowLeft, Mail, Phone, Globe, Building2, MapPin, ArrowUpRight } from "lucide-react";
 
-import React from "react";
-import { ArrowUpRight } from "lucide-react"
-import { getUserById, getUsers } from "@/lib/api";
+// shadcn UI Components
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+} from "@/components/ui/avatar";
 import {
   Card,
   CardHeader,
-  CardFooter,
   CardTitle,
-  CardAction,
   CardDescription,
+  CardAction,
   CardContent,
+  CardFooter,
 } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import Link from "next/link";
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-export default async function home() {
-  const users = await getUsers();
-  
+import { Params } from 'next/dist/server/request/params';
 
-  return <div className="min-h-screen w-full ">
+export default async function UserDetailsPage(
+    {params} : {params: Promise<{ id: string }>}) {
 
-
-    <div className = "w-full h-full p-10 grid grid-cols-2 row- gap-5 ">
-
-{users.map((user) => (
-  <Card key={user.id} className="h-fit  max-w-[40vw] min-w-100  bg-white/30 ">
+    const {id} = await params
+    const user = await getUserById(id)
+  return (   
+    <div className='min-h-screen w-full'>
+          <Card key={user.id} className=" h-full  my-auto mx-auto  max-w-[50vw] min-w-100  bg-white/30 ">
 
   <CardHeader>
     <div className="flex items-center gap-4">
@@ -69,8 +68,7 @@ export default async function home() {
   </CardFooter>
 </Card>
    
-   
-  ))}
-  </div>
-  </div>;
+    </div>
+      )
 }
+
