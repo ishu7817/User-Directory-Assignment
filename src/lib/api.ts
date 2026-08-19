@@ -8,8 +8,11 @@ export async function getUsers(): Promise<User[]> {
   }
   return res.json();
 }
-export async function getUserById(id: string): Promise<User> {
+export async function getUserById(id: string): Promise<User | null> {
   const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+  if (res.status === 404) {
+    return null;
+  }
   if (!res.ok) {
     throw new Error("Unable to fetch user data");
   }
