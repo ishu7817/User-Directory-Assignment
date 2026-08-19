@@ -34,6 +34,7 @@ if (!user || !user.id) {
   }
 const totalUsers = allUsers.length
 const isLastUser = user.id >= totalUsers
+const isFirstUser = user.id === 1
 
   const contactDetails = [
     { label: "Email", value: user.email },
@@ -111,7 +112,7 @@ const isLastUser = user.id >= totalUsers
           <h2 className="text-[20px] ">Address</h2>
 
           {addressDetails.map((item, index) => (
-            <div key={"index"} className="py-2 flex justify-between">
+            <div key={item.label} className="py-2 flex justify-between">
               <span className="text-muted-foreground">{item.label}</span>
               <span className="font-medium">{item.value}</span>
             </div>
@@ -122,7 +123,7 @@ const isLastUser = user.id >= totalUsers
           <h2 className="text-[20px] ">Company</h2>
 
           {companyDetails.map((item, index) => (
-            <div key={"index"} className="py-2 flex justify-between">
+            <div key={item.label} className="py-2 flex justify-between">
               <span className="text-muted-foreground">{item.label}</span>
               <span className="font-medium">{item.value}</span>
             </div>
@@ -130,24 +131,24 @@ const isLastUser = user.id >= totalUsers
         </div>
 
         <CardFooter className="flex justify-between">
-          <button className="" disabled={user.id === 1}>
-            <Link
+      {!isFirstUser &&
+              <Link
               className=" flex items-center text-white/80 underline font-mono"
               href={`${user.id - 1}`}
-            >
+              >
               <ArrowLeft className="h-3 w-3" /> Previous
             </Link>
-          </button>
-{
-    !isLastUser  && 
-          <button className="">
+            }
+        
+   { !isLastUser  && 
+          
             <Link
               className=" flex items-center text-white/80 underline font-mono "
               href={`${user.id + 1}`}
             >
               Next <ArrowRight className="h-3 w-3" />{" "}
             </Link>
-          </button>
+          
             }
         </CardFooter>
       </Card>
