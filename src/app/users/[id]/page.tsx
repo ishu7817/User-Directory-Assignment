@@ -1,12 +1,9 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import { getUserById, getUsers } from "@/lib/api";
-import {ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import {
-  ArrowUpRight,
-} from "lucide-react";
-
+import { ArrowUpRight } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -26,15 +23,14 @@ export default async function UserDetailsPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-
   const { id } = await params;
   const [user, allUsers] = await Promise.all([getUserById(id), getUsers()]);
-if (!user || !user.id) {
+  if (!user || !user.id) {
     notFound();
   }
-const totalUsers = allUsers.length
-const isLastUser = user.id >= totalUsers
-const isFirstUser = user.id === 1
+  const totalUsers = allUsers.length;
+  const isLastUser = user.id >= totalUsers;
+  const isFirstUser = user.id === 1;
 
   const contactDetails = [
     { label: "Email", value: user.email },
@@ -55,9 +51,13 @@ const isFirstUser = user.id === 1
   ];
   return (
     <div className=" min-h-screen ">
+      <Link href ="/" className=" md:flex whitespace-nowrap  hidden  items-center absolute left-5 top-5 underline hover:scale-95 text-white/50 hover:text-white text-sm cursor-pointer transition-all duration-75">
+   
+        <ArrowLeft className="h-3 w-3" /> Back to Directory
+      </Link>
       <Card
         key={user.id}
-        className=" py-15  my-auto mx-auto  max-w-[40vw] min-w-100  bg-white "
+        className=" py-15 rounded-0 min-h-full my-auto mx-auto  max-w-[40vw] min-w-100 bg-mist-900 text-white/90 border-zinc-800 "
       >
         <CardHeader>
           <div className="flex items-center gap-4 ">
@@ -88,7 +88,7 @@ const isFirstUser = user.id === 1
 
         <Separator />
         <Separator />
-        <div className=" w-full flex justify-between pl-4">
+        <div className=" w-full flex justify-between px-4">
           <span className="font-bold text-[20px] text-white/90">Website</span>
           <span className="inline-flex text-sm items-center gap-1 hover:opacity-70 hover:scale-95 cursor-pointer transition-all duration-75">
             <p>{user.website} </p> <ArrowUpRight className="h-3 w-3" />
@@ -131,25 +131,23 @@ const isFirstUser = user.id === 1
         </div>
 
         <CardFooter className="flex justify-between">
-      {!isFirstUser &&
-              <Link
+          {!isFirstUser && (
+            <Link
               className=" flex items-center text-white/80 underline font-mono"
               href={`${user.id - 1}`}
-              >
+            >
               <ArrowLeft className="h-3 w-3" /> Previous
             </Link>
-            }
-        
-   { !isLastUser  && 
-          
+          )}
+
+          {!isLastUser && (
             <Link
               className=" flex items-center text-white/80 underline font-mono "
               href={`${user.id + 1}`}
             >
               Next <ArrowRight className="h-3 w-3" />{" "}
             </Link>
-          
-            }
+          )}
         </CardFooter>
       </Card>
     </div>
