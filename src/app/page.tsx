@@ -29,8 +29,8 @@ export default async function home() {
   //
   //
   return (
-    <div className="min-h-screen min-w-full p-5 ">
-      <div className="   min-w-full h-full  min-[900px]:grid    justify-center min-[900px]:grid-cols-2 gap-5 ">
+    <div className="min-h-screen min-w-full p-5 min-[900px]:p-10 ">
+      <div className="   min-w-full h-full   min-[900px]:grid    justify-center grid-cols-2 gap-5 ">
         {users.map((user) => (
           <Card
             key={user.id}
@@ -56,22 +56,22 @@ export default async function home() {
                   </CardDescription>
                 </div>
               </div>
-              <Link href={`/users/${user.id}`}>
-                {" "}
-                <CardAction className="text-nowrap hover:opacity-70 hover:scale-95 cursor-pointer transition-all duration-75 underline">
-                view more                 </CardAction>
-              </Link>
+              
             </CardHeader>
             <CardContent>
               <p className="text-white/90 pt-4">{user.company.catchPhrase}</p>
             </CardContent>
             <CardFooter>
               <div className=" w-full flex justify-between">
-                <p>{user.website} </p>
+                <p className=" inline-flex text-sm items-center gap-1 hover:opacity-70 hover:scale-95 cursor-pointer transition-all duration-75">{user.website} <ArrowUpRight className="h-3 w-3" /> </p>
 
-                <span className="inline-flex text-sm items-center gap-1 hover:opacity-70 hover:scale-95 cursor-pointer transition-all duration-75n">
-                  visit <ArrowUpRight className="h-3 w-3" />
-                </span>
+        
+
+                <Link href={`/users/${user.id}`}>
+                {" "}
+                <CardAction className="text-nowrap hover:opacity-70 hover:scale-95 cursor-pointer transition-all duration-75 underline">
+                view more                 </CardAction>
+              </Link>
               </div>
             </CardFooter>
           </Card>

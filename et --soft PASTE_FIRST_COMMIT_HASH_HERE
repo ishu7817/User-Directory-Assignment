@@ -1,0 +1,11 @@
+[33me331c44[m Initial commit from Create Next App
+[33m9664dc6[m feat: setup user directory grid and dynamic user details route
+[33m00ffa69[m feat: implement error and loading states for user pages
+[33ma71b44b[m feat: Final bugs fixes
+[33ma172a63[m Revise README for user directory project
+[33m31b1dea[m feat: removed corousel file
+[33mb3cc94f[m fixed white bg bug on phone
+[33ma340601[m feat: add error handling component with retry functionality
+[33m09ba25c[m style: improve layout and spacing in user cards
+[33m3750ffc[m style: adjust padding and width in loading component for better responsiveness
+[33mfd780bd[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m feat: complete user directory with responsive layout, dark theme, and error handling
